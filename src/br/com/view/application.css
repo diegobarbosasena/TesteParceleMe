@@ -1,0 +1,7 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+TextField, PasswordField{
+	-fx-border-color: #61A218;
+	-fx-border-radius: 5;
+	-fx-background-insets: 0;
+}

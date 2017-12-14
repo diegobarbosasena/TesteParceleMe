@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="paneSplash" maxHeight="350.0" maxWidth="500.0" minHeight="350.0" minWidth="500.0" style="-fx-border-color: #61A218; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.controller.SplashController">
+   <children>
+      <ImageView fx:id="imgLogo" fitHeight="83.0" fitWidth="417.0" layoutX="50.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="228.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="49.647064208984375" AnchorPane.topAnchor="12.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <image>
+            <Image url="@../images/logo.png" />
+         </image>
+      </ImageView>
+      <ProgressIndicator fx:id="progIndicator" layoutX="223.0" layoutY="155.0" progress="0.0" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="161.0" layoutY="277.0" text="Desenvolvido por Diego Sena" textAlignment="CENTER" AnchorPane.bottomAnchor="12.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="19.0" layoutY="232.0" text="Teste prático realizado por Diego Sena e solicitado por Emerson da empresa parcele-me" />
+   </children>
+</AnchorPane>
