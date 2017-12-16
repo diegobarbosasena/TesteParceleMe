@@ -40,23 +40,25 @@ public class CadastrarController implements Initializable {
 	@FXML
 	private Button btnConcluido;
 	
-	static boolean cadastrar;
+	static String funcao = null;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		Masks.mascaraCelular(txtTelefone);
 		
-		if (cadastrar) {
-			
-			keyEnterInsert();
+		switch (funcao) {
 		
-		} else {	
+			case "cadastar": keyEnterInsert(); break;
 			
-			populateTextField();
+			case "atualizar": populateTextField(); keyEnterUpdate(); break;
 			
-			keyEnterUpdate();	
-		}	
+			case "visualizar": viewPessoa(); break; 
+			
+			default: break;
+			
+		}
+		
 		btnConcluido.setOnAction(v -> completed());
 		
 		btnConcluido.setOnKeyPressed(o -> {
@@ -132,8 +134,36 @@ public class CadastrarController implements Initializable {
 			if (Alert.alert_true) {
 				completed();
 			} 
-			cadastrar = true;
+			funcao = "cadastar";
 		}		
+	}
+	
+	private void viewPessoa(){
+		
+		txtNome.setDisable(true);
+		txtSobrenome.setDisable(true);
+		txtTelefone.setDisable(true);
+		
+		btnCadastrar.setVisible(false);
+		
+		btnConcluido.setText("Concluído");
+		
+		List<Pessoa> lstPessoa = new ArrayList<>();
+		
+		PessoaDao pessoaDao = new PessoaDao();
+		
+		lstPessoa = pessoaDao.getPessoa(LayoutController.pessoa_id);
+		
+		for (Pessoa pessoa : lstPessoa) {
+			
+			txtNome.setText(pessoa.getNome());
+			txtSobrenome.setText(pessoa.getSobrenome());
+			txtTelefone.setText(pessoa.getTelefone());
+		}
+		
+		btnConcluido.setOnAction(f -> completed());
+		
+		funcao = "cadastar";
 	}
 
 	private void completed() {
@@ -213,4 +243,5 @@ public class CadastrarController implements Initializable {
 			}
 		});
 	}
+	
 }

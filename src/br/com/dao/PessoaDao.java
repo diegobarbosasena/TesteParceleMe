@@ -9,10 +9,12 @@ import java.util.List;
 
 import br.com.ajudantes.MySqlConnectionFactory;
 import br.com.model.Pessoa;
+import javafx.scene.image.Image;
 
 public class PessoaDao {
 
 	private Connection connection;
+	public Image image;
 	
 	public PessoaDao() {
 		
@@ -55,7 +57,7 @@ public class PessoaDao {
 		return null;	
 	}
 	
-	public void insertPessoa(Pessoa pessoa)  {
+	public void insertPessoa(Pessoa pessoa )  {
 			
 		String sql = "insert into pessoa (nome, sobrenome, telefone) values (?,?,?)";
 		

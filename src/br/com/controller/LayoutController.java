@@ -109,7 +109,7 @@ public class LayoutController implements Initializable{
 
 	private void createPessoa() {
 		
-		CadastrarController.cadastrar = true ;
+		CadastrarController.funcao = "cadastar" ;
 		
 		Stage stageLayout = (Stage) paneLayout.getScene().getWindow();
 		stageLayout.close();
@@ -121,7 +121,7 @@ public class LayoutController implements Initializable{
 	
 	private void updatePessoa() {
 		
-		CadastrarController.cadastrar = false;
+		CadastrarController.funcao = "atualizar";
 		
 		Pessoa pessoa = tblPessoa.getSelectionModel().getSelectedItem();
 		
@@ -137,11 +137,13 @@ public class LayoutController implements Initializable{
 			
 			Janelas janelas = new Janelas();
 			Stage stage = new Stage();
-			janelas.abrirJanelas("Cadastrar.fxml", stage, "Atulizar dados");		
+			janelas.abrirJanelas("Cadastrar.fxml", stage, "Atualizar dados");		
 		}
 	}
 	
 	private void viewPessoa() {
+		
+		CadastrarController.funcao = "visualizar";
 		
 		Pessoa pessoa = tblPessoa.getSelectionModel().getSelectedItem();
 		
@@ -158,7 +160,7 @@ public class LayoutController implements Initializable{
 			
 			Janelas janelas = new Janelas();
 			Stage stage = new Stage();
-			janelas.abrirJanelas("Visualizar.fxml", stage, "Visualizar pessoa");
+			janelas.abrirJanelas("Cadastrar.fxml", stage, "Visualizar pessoa");
 		}
 	}
 	
