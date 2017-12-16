@@ -29,7 +29,7 @@ import javafx.stage.Stage;
 public class FuncaoController implements Initializable {
 	
 	@FXML
-	private AnchorPane paneCadastrar;
+	private AnchorPane paneFuncao;
 	@FXML
 	private Label lblNome;
 	@FXML
@@ -94,7 +94,7 @@ public class FuncaoController implements Initializable {
 		fileChooser = new FileChooser();
 		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("imagens", "*.jpg", "*.png"));
 		
-		file = fileChooser.showOpenDialog(paneCadastrar.getScene().getWindow());
+		file = fileChooser.showOpenDialog(paneFuncao.getScene().getWindow());
 		
 		if (file != null) {
 			
@@ -294,7 +294,7 @@ public class FuncaoController implements Initializable {
 	
 	private void completed() {
 		
-		Stage stageCadastar = (Stage) paneCadastrar.getScene().getWindow();
+		Stage stageCadastar = (Stage) paneFuncao.getScene().getWindow();
 		stageCadastar.close();
 		
 		Janelas janelas = new Janelas();
