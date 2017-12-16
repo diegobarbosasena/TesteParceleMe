@@ -19,7 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class CadastrarController implements Initializable {
+public class FuncaoController implements Initializable {
 	
 	@FXML
 	private AnchorPane paneCadastrar;
@@ -56,7 +56,6 @@ public class CadastrarController implements Initializable {
 			case "visualizar": viewPessoa(); break; 
 			
 			default: break;
-			
 		}
 		
 		btnConcluido.setOnAction(v -> completed());
@@ -161,21 +160,9 @@ public class CadastrarController implements Initializable {
 			txtTelefone.setText(pessoa.getTelefone());
 		}
 		
-		btnConcluido.setOnAction(f -> completed());
-		
 		funcao = "cadastar";
 	}
-
-	private void completed() {
-		
-		Stage stageCadastar = (Stage) paneCadastrar.getScene().getWindow();
-		stageCadastar.close();
-		
-		Janelas janelas = new Janelas();
-		Stage stage = new Stage();
-		janelas.abrirJanelas("Layout.fxml", stage, "Tela principal");
-	}
-
+	
 	private void clearTextField() {
 		txtNome.clear();
 		txtSobrenome.clear();
@@ -242,6 +229,16 @@ public class CadastrarController implements Initializable {
 				updatePessoa();
 			}
 		});
+	}
+	
+	private void completed() {
+		
+		Stage stageCadastar = (Stage) paneCadastrar.getScene().getWindow();
+		stageCadastar.close();
+		
+		Janelas janelas = new Janelas();
+		Stage stage = new Stage();
+		janelas.abrirJanelas("Layout.fxml", stage, "Tela principal");
 	}
 	
 }
