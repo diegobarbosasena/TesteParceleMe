@@ -71,6 +71,7 @@ public class LayoutController implements Initializable{
 		btnDeletar.setOnAction(c -> deletePessoa());
 		
 		btnEditar.setOnAction(f -> updatePessoa());
+		
 	}
 	
 	private void populatePessoa() {
