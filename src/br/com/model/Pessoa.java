@@ -6,6 +6,7 @@ public class Pessoa {
 	private String nome;
 	private String sobrenome;
 	private String telefone;
+	private byte[] foto;
 	
 	public Long getId() {
 		return id;
@@ -30,5 +31,11 @@ public class Pessoa {
 	}
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
+	}
+	public byte[] getFoto() {
+		return foto;
+	}
+	public void setFoto(byte[] foto) {
+		this.foto = foto;
 	}
 }

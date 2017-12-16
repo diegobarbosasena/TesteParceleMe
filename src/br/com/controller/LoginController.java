@@ -104,7 +104,6 @@ public class LoginController implements Initializable {
 	private void clearLogin() {
 		txtUsuario.clear();
 		txtSenha.clear();
-	
 	}
 
 }

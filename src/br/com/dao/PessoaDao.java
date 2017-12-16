@@ -1,5 +1,11 @@
 package br.com.dao;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -57,9 +63,9 @@ public class PessoaDao {
 		return null;	
 	}
 	
-	public void insertPessoa(Pessoa pessoa )  {
+	public void insertPessoa(Pessoa pessoa, InputStream foto )  {
 			
-		String sql = "insert into pessoa (nome, sobrenome, telefone) values (?,?,?)";
+		String sql = "insert into pessoa (nome, sobrenome, telefone, foto) values (?,?,?,?)";
 		
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -67,6 +73,8 @@ public class PessoaDao {
 			preparedStatement.setString(1, pessoa.getNome());
 			preparedStatement.setString(2, pessoa.getSobrenome());
 			preparedStatement.setString(3, pessoa.getTelefone());
+			
+			preparedStatement.setBinaryStream(4, foto);
 			
 			preparedStatement.execute();
 			preparedStatement.close();
@@ -89,9 +97,9 @@ public class PessoaDao {
 		}	
 	}
 	
-	public void updatePessoa(Pessoa pessoa) {
+	public void updatePessoa(Pessoa pessoa, InputStream foto) {
 	
-		String sql = "update pessoa set nome = ?, sobrenome = ?, telefone = ? where id = ?";
+		String sql = "update pessoa set nome = ?, sobrenome = ?, telefone = ?, foto = ? where id = ?";
 		
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -99,7 +107,10 @@ public class PessoaDao {
 			preparedStatement.setString(1, pessoa.getNome());
 			preparedStatement.setString(2, pessoa.getSobrenome());
 			preparedStatement.setString(3, pessoa.getTelefone());
-			preparedStatement.setLong(4, pessoa.getId());
+			
+			preparedStatement.setBinaryStream(4, foto);
+			
+			preparedStatement.setLong(5, pessoa.getId());
 			
 			preparedStatement.execute();
 			preparedStatement.close();
@@ -140,4 +151,45 @@ public class PessoaDao {
 		}
 		return null;
 	}
+	
+	public Image getFoto(Long id) {
+		
+		String sql = "select * from pessoa where id = ?";
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setLong(1, id);
+			
+			ResultSet resultSet = preparedStatement.executeQuery();
+			
+			while (resultSet.next()) {
+				
+				InputStream is = resultSet.getBinaryStream("foto");
+				OutputStream os = new FileOutputStream(new File("photo.jpg"));
+				
+				byte[] content = new byte[1024];
+				int size = 0;
+				
+				while ((size = is.read(content)) != -1) {
+					os.write(content, 0, size);
+				}
+				os.close();
+				is.close();
+				
+				image = new Image("file:photo.jpg", true);
+			}
+			
+			preparedStatement.close();
+			resultSet.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return image;
+	}
+	
 }
